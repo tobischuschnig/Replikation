@@ -1,12 +1,17 @@
 package klukua.Reader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import klukua.Config.ConfigLoader;
@@ -39,6 +44,8 @@ public class Reader {
 
 	// beinhaltet alle ausgelesenen Daten
 	private ArrayList<String[][]> fullData;
+	
+	private String dbms;
 
 	/**
 	 * Konstruktor, der die Parameter speichert und je nach spezifiziertem dbms
@@ -59,7 +66,7 @@ public class Reader {
 			SQLException {
 		// ConfigLoader speichern um auf Daten zugreifen zu koennen
 		this.cl = cl;
-
+		this.dbms = dbms;
 		this.fullData = new ArrayList<String[][]>();
 
 		// anmelden an der db je nachdem welches dbms verwendet wird
@@ -113,6 +120,18 @@ public class Reader {
 		// bei fehlerfreien aufbau der verbindung wird der wert auf true gesetzt
 		connectedToDatabase = true;
 
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		String fn = "./logs/reader/" + sdf.format(date) + "_" + dbms + "_LOG.txt";
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(fn);
+		} catch (FileNotFoundException e) {
+			System.err.println("Kein File fuer logging gefunden!");
+		}
+		System.out.println(fn);
+
+		new File(fn);
 		// Itteriert durch jede Tabelle und selected deren relevante Inhalte
 		for (int i = 0; i < cl.getCountTable(); i++) {
 			// Speichert mit Beistrich getrennt alle Spalten die gelesen werden
@@ -132,12 +151,17 @@ public class Reader {
 			// Ausfuehren der entstehenden Query, die die Inhalte richtigen
 			// Spalten jeder Tabelle einzeln
 			// bei den Schleifendurchlaufen ermitteln soll
+			out.println("SELECT "
+					+ columnsToBeSelected + " FROM "
+					+ cl.getTables()[i][0 + postgresqlIncrementor]);
+			
 			fullData.add(convertResultSetToArray(setQuery("SELECT "
 					+ columnsToBeSelected + " FROM "
 					+ cl.getTables()[i][0 + postgresqlIncrementor])));
 		}
 		statement.close();
 		connection.close();
+		out.close();
 	}
 
 	/**

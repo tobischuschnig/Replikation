@@ -1,0 +1,4 @@
+SELECT anr,name,zeitstempel FROM angestellte
+SELECT pnr,name,beschreibung,preis,zeitstempel FROM produkte
+SELECT knr,name,anschrift,zeitstempel FROM kunden
+SELECT knr,rnr,pnr,zeitstempel FROM rechnung
