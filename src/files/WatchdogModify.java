@@ -9,6 +9,9 @@ import java.nio.file.*;
 
 public class WatchdogModify implements Runnable {
 	private String ordner;
+	private Server server;
+	private Client client;
+	
 	
 	public WatchdogModify(String ordner) {
 		this.ordner = ordner;
@@ -26,6 +29,7 @@ public class WatchdogModify implements Runnable {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					if(!event.context().equals(".DS_Store")) {
 						Path newPath = (Path)event.context();
+						
 						System.out.println("Modify file: " + newPath);
 					}
 				}

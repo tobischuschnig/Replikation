@@ -10,6 +10,8 @@ import java.nio.file.*;
 
 public class WatchdogDelete implements Runnable {
 	private String ordner;
+	private Server server;
+	private Client client;
 	
 	public WatchdogDelete(String ordner) {
 		this.ordner = ordner;

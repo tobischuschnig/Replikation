@@ -10,8 +10,10 @@ import java.nio.file.WatchService.*;
 import java.util.List;
 
 public class WatchdogCreate implements Runnable {
-private String ordner;
-	
+	private String ordner;
+	private Server server;
+	private Client client;
+
 	public WatchdogCreate(String ordner) {
 		this.ordner = ordner;
 	}
@@ -27,6 +29,7 @@ private String ordner;
 			while(true) {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					Path newPath = (Path)event.context();
+					server.created(newPath);
 					System.out.println("New file: " + newPath);
 				}
 			}
