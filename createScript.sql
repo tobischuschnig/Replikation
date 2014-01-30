@@ -5,43 +5,46 @@ use replication;
 create table angestellte(
 	anr		integer,
 	name	varchar(255),
+	zeitstempel	integer,
 	primary key (anr)
 	)ENGINE = INNODB;
 	
-insert into angestellte values(1,'Angestellter1');
-insert into angestellte values(2,'Angestellter2');
-insert into angestellte values(3,'Angestellter3');
-insert into angestellte values(4,'Angestellter4');
-insert into angestellte values(5,'Angestellter5');
-insert into angestellte values(6,'Angestellter6');
-insert into angestellte values(7,'Angestellter7');
-insert into angestellte values(8,'Angestellter8');
-insert into angestellte values(9,'Angestellter9');
-insert into angestellte values(10,'Angestellter10');
+insert into angestellte values(1,'Angestellter1',1);
+insert into angestellte values(2,'Angestellter2',1);
+insert into angestellte values(3,'Angestellter3',1);
+insert into angestellte values(4,'Angestellter4',1);
+insert into angestellte values(5,'Angestellter5',1);
+insert into angestellte values(6,'Angestellter6',1);
+insert into angestellte values(7,'Angestellter7',1);
+insert into angestellte values(8,'Angestellter8',1);
+insert into angestellte values(9,'Angestellter9',1);
+insert into angestellte values(10,'Angestellter10',1);
 
 create table produkte(
 	pnr		integer,
 	name	varchar(255),
 	beschreibung	varchar(255),
 	preis	integer,
+	zeitstempel		integer,
 	primary key(pnr)
 	)ENGINE = INNODB;
 	
-insert into produkte values(1,'Produkt1','Produkt1 ist super',123);
-insert into produkte values(2,'Produkt2','Produkt2 ist super',133);
-insert into produkte values(3,'Produkt3','Produkt3 ist super',323);
-insert into produkte values(4,'Produkt4','Produkt4 ist super',345);
-insert into produkte values(5,'Produkt5','Produkt5 ist super',457);
-insert into produkte values(6,'Produkt6','Produkt6 ist super',265);
-insert into produkte values(7,'Produkt7','Produkt7 ist super',976);
-insert into produkte values(8,'Produkt8','Produkt8 ist super',234);
-insert into produkte values(9,'Produkt9','Produkt9 ist super',254);
-insert into produkte values(10,'Produkt10','Produkt10 ist super',763);
+insert into produkte values(1,'Produkt1','Produkt1 ist super',123,1);
+insert into produkte values(2,'Produkt2','Produkt2 ist super',133,1);
+insert into produkte values(3,'Produkt3','Produkt3 ist super',323,1);
+insert into produkte values(4,'Produkt4','Produkt4 ist super',345,1);
+insert into produkte values(5,'Produkt5','Produkt5 ist super',457,1);
+insert into produkte values(6,'Produkt6','Produkt6 ist super',265,1);
+insert into produkte values(7,'Produkt7','Produkt7 ist super',976,1);
+insert into produkte values(8,'Produkt8','Produkt8 ist super',234,1);
+insert into produkte values(9,'Produkt9','Produkt9 ist super',254,1);
+insert into produkte values(10,'Produkt10','Produkt10 ist super',763,1);
 
 create table kunden(
 	knr		integer,
 	name	varchar(255),
 	anschrift	varchar(255),
+	zeitstempel		integer,
 	primary key(knr)
 	)ENGINE = INNODB;
 	
@@ -60,7 +63,7 @@ create table rechnung(
 	knr		integer,
 	rnr		integer,
 	pnr		integer,
-	zeit 	integer,
+	zeitstempel 	integer,
 	primary key(rnr)
 	)ENGINE = INNODB;
 	

@@ -73,6 +73,10 @@ public class Reader {
 					"jdbc:postgresql://" + cl.getPosAddress() + "/"
 							+ cl.getPosDatabase(), cl.getPosUser(),
 					cl.getPosPassword(), 1);
+		else if(dbms.equalsIgnoreCase("mysql2"))
+			readData(JDBC_DRIVER_MYSQL, "jdbc:mysql://" + cl.getPosAddress()
+					+ "/" + cl.getPosDatabase(), cl.getPosUser(),
+					cl.getPosPassword(), 0);
 	}
 
 	/**

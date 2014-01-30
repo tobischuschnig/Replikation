@@ -67,6 +67,10 @@ public class Writer {
 					"jdbc:postgresql://" + cl.getPosAddress() + "/"
 							+ cl.getPosDatabase(), cl.getPosUser(),
 					cl.getPosPassword(), 1);
+		else if(dbms.equalsIgnoreCase("mysql2"))
+			writeData(JDBC_DRIVER_MYSQL, "jdbc:mysql://" + cl.getPosAddress()
+					+ "/" + cl.getPosDatabase(), cl.getPosUser(),
+					cl.getPosPassword(), 0);
 	}
 
 	/**

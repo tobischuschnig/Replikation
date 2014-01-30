@@ -19,7 +19,7 @@ public class TestKlasse {
 	
 			// Starten der Reader fuer MySQL und PostgreSQL
 			Reader readerMySQL = new Reader(cl, "mysql");
-			Reader readerPostGreSQL = new Reader(cl, "postgresql");
+			Reader readerPostGreSQL = new Reader(cl, "mysql2");
 	
 			// Aufrufen der Klasse die fuer das Kombinieren der beiden Datenbanken
 			// zustaendig ist
@@ -28,8 +28,7 @@ public class TestKlasse {
 			// Starten der beiden Klassen die in beide Datenbanken alle Daten
 			// schreiben
 			Writer myWriter = new Writer(cl, "mysql", combiner.getCombinedList());
-			Writer posWriter = new Writer(cl, "postgresql",
-					combiner.getCombinedList());
+			Writer posWriter = new Writer(cl, "mysql2", combiner.getCombinedList());
 		} catch(Exception e){
 			System.err.println("Es ist ein Fehler aufgetreten! "+e.getMessage());
 		}

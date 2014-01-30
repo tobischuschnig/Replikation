@@ -1,0 +1,28 @@
+[mysql]
+localhost root Test replication
+[postgreSQL]
+localhost root Test replication2
+angestellte angestellte (zeitstempel,zeitstempel)
+anr anr number+
+name name string
+zeitstempel zeitstempel number
+;
+produkte produkte (zeitstempel,zeitstempel)
+pnr pnr number+
+name name string
+beschreibung beschreibung string
+preis preis number
+zeitstempel zeitstempel number
+;
+kunden kunden (zeitstempel,zeitstempel)
+knr knr number+
+name name string
+anschrift anschrift string
+zeitstempel zeitstempel integer
+;
+rechnung rechnung (zeitstempel,zeitstempel)
+knr knr number
+rnr rnr number+
+pnr pnr number
+zeitstempel zeitstempel number
+;
