@@ -55,3 +55,22 @@ insert into kunden values(7,'Name7','Anschrift7');
 insert into kunden values(8,'Name8','Anschrift8');
 insert into kunden values(9,'Name9','Anschrift9');
 insert into kunden values(10,'Name10','Anschrift10');
+
+create table rechnung(
+	knr		integer,
+	rnr		integer,
+	pnr		integer,
+	zeit 	integer,
+	primary key(rnr)
+	)ENGINE = INNODB;
+	
+insert into rechnung values(1,1,1,1);
+insert into rechnung values(2,2,2,2);
+insert into rechnung values(3,3,3,3);
+insert into rechnung values(4,4,4,3);
+insert into rechnung values(5,5,5,3);
+insert into rechnung values(6,6,6,3);
+insert into rechnung values(7,7,7,3);
+insert into rechnung values(8,8,8,3);
+insert into rechnung values(9,9,9,3);
+insert into rechnung values(10,10,10,10);
