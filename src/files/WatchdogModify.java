@@ -35,7 +35,7 @@ public class WatchdogModify implements Runnable {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					if(!event.context().equals(".DS_Store")) {
 						Path newPath = (Path)event.context();
-						sender.sendMessage(Utill.packing(newPath));
+						//sender.sendMessage(Utill.packing(newPath));
 						//server.created(newPath);
 						System.out.println("Modify file: " + newPath);
 					}

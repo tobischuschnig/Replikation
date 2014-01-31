@@ -3,14 +3,18 @@ package files;
 
 import java.io.IOException;
 import java.net.URI;import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 
 import java.nio.file.*;
 import java.nio.file.WatchService.*;
 import java.util.List;
 
+import model.FileVorlage;
+
 import util.Utill;
 import receiversender.Sender;
+
 
 public class WatchdogCreate implements Runnable {
 	private String ordner;
@@ -33,8 +37,10 @@ public class WatchdogCreate implements Runnable {
 			
 			while(true) {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
-					Path newPath = (Path)event.context();
-					sender.sendMessage(Utill.packing(newPath));
+					//Path newPath = (Path)event.context();
+					Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
+					FileVorlage file = Utill.packing(newPath);
+					sender.sendMessage(file);
 					//server.created(newPath);
 					System.out.println("New file: " + newPath);
 				}
