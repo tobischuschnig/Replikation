@@ -11,12 +11,12 @@ import model.FileVorlage;
 public class Utill {
 	public static FileVorlage packing(Path path) {
 		while(true){
-//			try {
-//				Thread.sleep(5000);
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			File f = path.toFile();
 			FileInputStream fis =null;
 
@@ -27,7 +27,10 @@ public class Utill {
 				byte [] size = new byte[(int) f.length()];
 
 				fis.read(size);
-				System.out.println(size);
+				for (int i =0; i < size.length;i++) {
+				System.out.println(size[i]);
+				}
+						
 				FileVorlage fc = new FileVorlage(size, f.getName(), 0);
 				return fc;
 			} catch (IOException e) {

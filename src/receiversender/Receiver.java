@@ -77,6 +77,7 @@ public class Receiver implements Runnable{
 			try {				
 				o = in.readObject();
 				fc = (FileVorlage) o;
+				System.out.println("blabal");
 			} catch(SocketException e){
 				System.out.println("Connection to Client lost.");
 				break;
@@ -87,11 +88,13 @@ public class Receiver implements Runnable{
 			}
 			
 			if(o instanceof FileVorlage){
+				System.out.println("if");
 				fc = (FileVorlage) o;
 				String ret;
 				 FileOutputStream fos;
 				try {
-					fos = new FileOutputStream(path.toString()+fc.getName());
+					System.out.println(path.toString()+"bla"+fc.getName());
+					fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
 				    
 				    bos.write(fc.getF());
@@ -103,6 +106,7 @@ public class Receiver implements Runnable{
 		}
 		try {
 			client.close();
+			System.out.println("fail");
 		} catch (IOException e) {
 			System.out.println("Could not close client");
 		}

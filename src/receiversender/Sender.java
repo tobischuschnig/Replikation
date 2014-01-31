@@ -80,6 +80,7 @@ public class Sender implements Runnable{
 							//Could not wait
 						}
 					}
+					System.out.println("Funkt");
 					objectOutput.writeObject(fc);					 
 					String s="";
 					try {
@@ -91,6 +92,7 @@ public class Sender implements Runnable{
 					}
 					
 					fc=null;
+					
 				}finally{
 					lock.unlock();
 				}
