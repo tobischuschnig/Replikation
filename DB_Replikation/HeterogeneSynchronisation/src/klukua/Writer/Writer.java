@@ -1,11 +1,15 @@
 package klukua.Writer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import klukua.Config.ConfigLoader;
 
@@ -99,7 +103,15 @@ public class Writer {
 
 		// ob man zur Db verbunden ist
 		connectedToDatabase = true;
-
+		Date date = new Date();
+		PrintWriter out = null;
+		String filename = String.valueOf(date.getYear()) + String.valueOf(date.getMonth()) + String.valueOf(date.getDay()) + 
+				String.valueOf(date.getHours()) + String.valueOf(date.getMinutes()) + String.valueOf(date.getSeconds()) + "LOG.txt";
+		String filename2 = date.toString() + "LOG.txt";
+		System.out.println(filename);
+		System.out.println(filename2);
+		new File(filename);
+		
 		// Itteriert durch jede Tabelle und selected deren relevante Inhalte
 		for (int i = 0; i < cl.getCountTable(); i++) {
 			// Delete
@@ -125,13 +137,14 @@ public class Writer {
 			columnsToBeInserted = columnsToBeInserted.substring(0,
 					columnsToBeInserted.length() - 1);
 
+			
 			// In dieser Schleife werden alle Inserts einer Tabelle
 			// durchgefuehrt
 			for (int j = 0; j < fullData.get(i).length; j++) {
 				String values = "";
 				// Diese Schleife sorgt dafuer, alle Werte, die zu Inserten sind
 				// mit dem richtigen Datentyp zu assoziieren
-				// und somit die richtigen Schreibweise z.B. beoi string mit ''
+				// und somit die richtigen Schreibweise z.B. bei string mit ''
 				// zu waehlen
 				for (int j2 = 0; j2 < fullData.get(i)[j].length; j2++) {
 					//System.out.println(fullData.get(i)[j][j2]);
@@ -153,8 +166,22 @@ public class Writer {
 				setUpdateQuery("INSERT INTO "
 						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
 						+ columnsToBeInserted + ") VALUES(" + values + ")");
+			
+				try {
+					out = new PrintWriter("logs" + filename);
+					Date date2 = new Date();
+					@SuppressWarnings("deprecation")
+					String datestring = String.valueOf(date2.getYear()) + "." +  String.valueOf(date2.getMonth()) + "." + String.valueOf(date2.getDay()) + 
+							"." + String.valueOf(date2.getHours()) + ":" + String.valueOf(date2.getMinutes()) + ":" + String.valueOf(date2.getSeconds());
+					out.println(datestring + "INSERT INTO "
+						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
+						+ columnsToBeInserted + ") VALUES(" + values + ")");
+				} catch (FileNotFoundException e) {
+					System.err.println("Es konnte kein File zum loggen gefunden werden.");
+				}
 
 			}
+			out.close();
 		}
 		statement.close();
 	}

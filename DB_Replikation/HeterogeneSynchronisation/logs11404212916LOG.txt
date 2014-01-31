@@ -1,0 +1,1 @@
+114.0.4.21:29:16INSERT INTO produkte (pnr,name,beschreibung,preis,zeitstempel) VALUES(12,'Produkt12','Produkt12 ist super',765,1)
