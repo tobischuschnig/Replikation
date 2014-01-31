@@ -9,11 +9,18 @@ import java.nio.file.*;
 import java.nio.file.WatchService.*;
 import java.util.List;
 
+import util.Utill;
+import receiversender.Sender;
+
 public class WatchdogCreate implements Runnable {
-private String ordner;
-	
-	public WatchdogCreate(String ordner) {
+	private String ordner;
+	private Server server;
+	private Client client;
+	private Sender sender;
+
+	public WatchdogCreate(String ordner,Sender sender) {
 		this.ordner = ordner;
+		this.sender = sender;
 	}
 	
 	
@@ -27,6 +34,8 @@ private String ordner;
 			while(true) {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					Path newPath = (Path)event.context();
+					sender.sendMessage(Utill.packing(newPath));
+					//server.created(newPath);
 					System.out.println("New file: " + newPath);
 				}
 			}
