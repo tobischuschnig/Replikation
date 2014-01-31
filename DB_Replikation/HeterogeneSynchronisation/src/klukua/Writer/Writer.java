@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -104,13 +105,15 @@ public class Writer {
 		// ob man zur Db verbunden ist
 		connectedToDatabase = true;
 		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String fn = sdf.format(date) + "LOG.txt";
 		PrintWriter out = null;
-		String filename = String.valueOf(date.getYear()) + String.valueOf(date.getMonth()) + String.valueOf(date.getDay()) + 
-				String.valueOf(date.getHours()) + String.valueOf(date.getMinutes()) + String.valueOf(date.getSeconds()) + "LOG.txt";
-		String filename2 = date.toString() + "LOG.txt";
-		System.out.println(filename);
-		System.out.println(filename2);
-		new File(filename);
+//		String filename = String.valueOf(date.getYear()) + String.valueOf(date.getMonth()) + String.valueOf(date.getDay()) + 
+//				String.valueOf(date.getHours()) + String.valueOf(date.getMinutes()) + String.valueOf(date.getSeconds()) + "LOG.txt";
+//		String filename2 = date.toString() + "LOG.txt";
+		System.out.println(fn);
+//		System.out.println(filename2);
+		new File(fn);
 		
 		// Itteriert durch jede Tabelle und selected deren relevante Inhalte
 		for (int i = 0; i < cl.getCountTable(); i++) {
@@ -168,7 +171,7 @@ public class Writer {
 						+ columnsToBeInserted + ") VALUES(" + values + ")");
 			
 				try {
-					out = new PrintWriter("logs" + filename);
+					out = new PrintWriter(fn);
 					Date date2 = new Date();
 					@SuppressWarnings("deprecation")
 					String datestring = String.valueOf(date2.getYear()) + "." +  String.valueOf(date2.getMonth()) + "." + String.valueOf(date2.getDay()) + 
