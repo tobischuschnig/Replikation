@@ -41,8 +41,11 @@ public class WatchdogCreate implements Runnable {
 					Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
 					FileVorlage file = Utill.packing(newPath);
 					sender.sendMessage(file);
+					//Filesynchro.senderneu();
 					//server.created(newPath);
 					System.out.println("New file: " + newPath);
+					break;
+					
 				}
 			}
 		} catch (IOException e) {

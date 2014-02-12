@@ -93,7 +93,7 @@ public class Receiver implements Runnable{
 				String ret;
 				 FileOutputStream fos;
 				try {
-					System.out.println(path.toString()+"bla"+fc.getName());
+					System.out.println(path.toString()+"2/"+fc.getName());
 					fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
 				    

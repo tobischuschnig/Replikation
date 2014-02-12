@@ -81,17 +81,21 @@ public class Sender implements Runnable{
 						}
 					}
 					System.out.println("Funkt");
-					objectOutput.writeObject(fc);					 
+					objectOutput.writeObject(fc);
+					System.out.println("Funkt2");
 					String s="";
-					try {
-						s = (String)input.readObject();
-						System.out.println(s);
-						
-					} catch (ClassNotFoundException e) {
-						
-					}
-					
+//					try {
+//						System.out.println("Funkt3");
+//						s = (String)input.readObject();
+//						System.out.println("Funkt4");
+//						System.out.println(s+"asdfasdf");
+//						
+//					} catch (ClassNotFoundException e) {
+//						System.err.println("Fehler");
+//					}
+					System.out.println("Funkt4");
 					fc=null;
+					//lock.unlock();
 					
 				}finally{
 					lock.unlock();

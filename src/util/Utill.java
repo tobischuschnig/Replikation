@@ -32,6 +32,7 @@ public class Utill {
 				}
 						
 				FileVorlage fc = new FileVorlage(size, f.getName(), 0);
+				System.out.println("End");
 				return fc;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

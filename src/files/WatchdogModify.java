@@ -3,9 +3,12 @@ package files;
 
 import java.io.IOException;
 import java.net.URI;import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 
 import java.nio.file.*;
+
+import model.FileVorlage;
 
 import receiversender.Sender;
 
@@ -34,7 +37,9 @@ public class WatchdogModify implements Runnable {
 			while(true) {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					if(!event.context().equals(".DS_Store")) {
-						Path newPath = (Path)event.context();
+						Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
+						FileVorlage file = Utill.packing(newPath);
+						sender.sendMessage(file);
 						//sender.sendMessage(Utill.packing(newPath));
 						//server.created(newPath);
 						System.out.println("Modify file: " + newPath);

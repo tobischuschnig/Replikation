@@ -15,10 +15,11 @@ import receiversender.Receiver;
 import receiversender.Sender;
 
 public class Filesynchro {
+	private static int portServer;
 	public static void main (String args[]) {
 		///Users/tobi/Desktop/Neuer //Test verzeichnis
 		try {
-			int portServer = Integer.parseInt(args[1]); //sender
+			portServer = Integer.parseInt(args[1]); //sender
 			int portClient = Integer.parseInt(args[2]); //receiver
 //			Server server = new Server(files,args[0],portServer);
 //			Client client = new Client(files,args[0],portServer);
@@ -69,4 +70,11 @@ public class Filesynchro {
         } catch (IOException ex) {}
         return fileNames;
     }
+	
+	public static void senderneu() {
+		Sender sender = new Sender(portServer);
+		Thread thread2 = new Thread(sender);
+		thread2.start();
+		System.out.println("Server is now send able!");
+	}
 }
