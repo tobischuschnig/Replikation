@@ -11,7 +11,7 @@ public class FileVorlage implements Serializable{
 	public FileVorlage(byte[] fi, String n, int m){
 		f = fi;
 		name = n;
-		m = method;
+		method = m;
 	}
 
 	public byte[] getF() {

@@ -9,7 +9,10 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URI;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import model.FileVorlage;
 
@@ -93,14 +96,22 @@ public class Receiver implements Runnable{
 				String ret;
 				 FileOutputStream fos;
 				try {
-					System.out.println(path.toString()+"2/"+fc.getName());
-					fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					if(fc.getMethod()==0) {
+						System.out.println(path.toString()+"2/"+fc.getName());
+						fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
+						BufferedOutputStream bos = new BufferedOutputStream(fos);
+						//if (fc.getMethod() == 0 || fc.getMethod() == 2) {
 				    
-				    bos.write(fc.getF());
-				    bos.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+						bos.write(fc.getF());
+				    	bos.close();
+				    }
+				    else if (fc.getMethod() == 1){
+				    	Path newPath =  Paths.get(URI.create("file:"+path.toString()+"2/"+fc.getName()));
+				    	Files.delete(newPath);
+				    	fc.getName();
+				    }
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}

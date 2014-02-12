@@ -43,7 +43,7 @@ public class Filesynchro {
 				//Server server = new Server(files,args[0],portServer);
 				//Client client = new Client(files,args[0],portServer);
 				Thread wert1 = new Thread(new WatchdogCreate(args[0],sender));
-				Thread wert2 = new Thread(new WatchdogDelete(args[0]));
+				Thread wert2 = new Thread(new WatchdogDelete(args[0],sender));
 				Thread wert3 = new Thread(new WatchdogModify(args[0],sender));
 				wert1.start();
 				wert2.start();
