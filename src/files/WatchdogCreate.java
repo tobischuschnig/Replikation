@@ -37,12 +37,18 @@ public class WatchdogCreate implements Runnable {
 			
 			while(true) {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
+					if(!(event.context()).toString().contains(".DS_Store")) {
 					//Path newPath = (Path)event.context();
+					
 					Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
-					FileVorlage file = Utill.packing(newPath);
+					FileVorlage file = Utill.packing(newPath,false);
 					sender.sendMessage(file);
-					//server.created(newPath);
+					
+						//Filesynchro.senderneu();
+						//server.created(newPath);
 					System.out.println("New file: " + newPath);
+					//break;
+					}
 				}
 			}
 		} catch (IOException e) {
