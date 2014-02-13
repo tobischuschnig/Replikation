@@ -3,6 +3,7 @@ package files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+
 public class Server {
 	private ArrayList<String> ownfiles; //alle Datenelemente die man selbst besitzt 
 	private ArrayList<String> files; //alle Datenelemente die ein anderer besitzt 

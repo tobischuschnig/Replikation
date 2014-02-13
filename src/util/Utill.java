@@ -8,7 +8,20 @@ import java.nio.file.*;
 
 import model.FileVorlage;
 
+/**
+ * Eine Util Klasse beinhaltet alle allgemeinen Code teile
+ * @author Tobias Schuschnig
+ *
+ */
 public class Utill {
+	
+	/**
+	 * Diese Methode verpackt das File in einem Byte stream in die Filevorlage die geschickt werden
+	 * kann
+	 * @param path Der Pfad
+	 * @param delete Ob das File geloescht werden soll
+	 * @return die FileVorlage die geschickt wird
+	 */
 	public static FileVorlage packing(Path path,boolean delete) {
 		while(true){
 			try {
@@ -23,16 +36,16 @@ public class Utill {
 				try {
 					fis = new FileInputStream(f);
 
-					System.out.println("Write");
+					//System.out.println("Write");
 					byte [] size = new byte[(int) f.length()];
 
 					fis.read(size);
-					for (int i =0; i < size.length;i++) {
-						System.out.println(size[i]);
-					}
+					//for (int i =0; i < size.length;i++) {
+						//System.out.println(size[i]);
+					//}
 
 					FileVorlage fc = new FileVorlage(size, f.getName(), 0);
-					System.out.println("End");
+					//System.out.println("End");
 					return fc;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -43,7 +56,7 @@ public class Utill {
 				//System.out.println("asdfasdfasdfasdfasdf");
 				FileVorlage file = new FileVorlage(null,f.getName(),1);
 				//file.setMethod(1);
-				System.out.println(file.getMethod());
+				//System.out.println(file.getMethod());
 				return file;
 			}
 		}

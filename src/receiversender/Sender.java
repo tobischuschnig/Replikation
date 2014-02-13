@@ -44,10 +44,10 @@ public class Sender implements Runnable{
 			con = lock.newCondition();
 //			t  = new Thread(this);
 		} catch (UnknownHostException e) {
-			System.out.println("Could not Connect to Server");
+			System.err.println("Could not Connect to Server");
 			return;
 		} catch (IOException e) {
-			System.out.println("Could not open Connection\nCheck server and restart");
+			System.err.println("Could not open Connection\nCheck server and restart");
 			return;
 		}
 //		t.start();
@@ -80,9 +80,9 @@ public class Sender implements Runnable{
 							//Could not wait
 						}
 					}
-					System.out.println("Funkt");
+					//System.out.println("Funkt");
 					objectOutput.writeObject(fc);
-					System.out.println("Funkt2");
+					//System.out.println("Funkt2");
 					String s="";
 //					try {
 //						System.out.println("Funkt3");
@@ -93,7 +93,7 @@ public class Sender implements Runnable{
 //					} catch (ClassNotFoundException e) {
 //						System.err.println("Fehler");
 //					}
-					System.out.println("Funkt4");
+					//System.out.println("Funkt4");
 					fc=null;
 					//lock.unlock();
 					
@@ -104,7 +104,7 @@ public class Sender implements Runnable{
 //			s.close();
 			
 		} catch (IOException e) {
-			System.out.println("Server unreachable. Check configs and restart");
+			System.err.println("Server unreachable. Check configs and restart");
 		}
 	}
 

@@ -15,19 +15,33 @@ import model.FileVorlage;
 import util.Utill;
 import receiversender.Sender;
 
-
+/**
+ * Dies ist ein Watchdog der auf Aenderungen schaut
+ * In diesem Fall wird auf Erstellungen
+ * Der Code des Watchdoges ist im wesentlichen von
+ * http//jaxenter.de/artikel/javaniofile-Zeitgemaesses-Arbeiten-mit-Dateien-166848
+ * @author Tobias Schuschnig
+ */
 public class WatchdogCreate implements Runnable {
 	private String ordner;
 	private Server server;
 	private Client client;
 	private Sender sender;
 
+	
+	/**
+	 * Erzeugt einen neuen Watchdog
+	 * @param ordner der Ordner der ueberwacht werden soll
+	 * @param sender der Sender auf dem das File rausgesendet wird
+	 */
 	public WatchdogCreate(String ordner,Sender sender) {
 		this.ordner = ordner;
 		this.sender = sender;
 	}
 	
-	
+	/**
+	 * Die run Methode von Thread ueberprueft laufend die aenderungen des ordners
+	 */
 	public void run() {
 		try {
 			Path path = Paths.get(URI.create("file:"+ordner));
@@ -53,7 +67,12 @@ public class WatchdogCreate implements Runnable {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println("Fail by reading the File. Please check the File and try again.");
+
+		} catch (Exception e) {
+			System.err.println("Invalid File! Please check the Path and the File" +
+					"\nThe Path may not consists spaces.");
 		}
 	}
 
