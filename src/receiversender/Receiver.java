@@ -46,7 +46,9 @@ public class Receiver implements Runnable{
 //	
 //	public Receiver() {
 //		
+	
 //	}
+	
 	/**
 	 * Creates the UserHandler and starts the Connection
 	 * 
@@ -59,6 +61,7 @@ public class Receiver implements Runnable{
 //		executor = new Thread(this);
 //		executor.start();
 	}
+	
 	@Override
 	public void run() {
 		ServerSocket s;
@@ -86,9 +89,14 @@ public class Receiver implements Runnable{
 				System.out.println("Connection to Client lost.");
 				break;
 			}
-			catch (IOException|ClassNotFoundException e) {
+			catch (IOException e) {
 				System.err.println("Invalid Stream! Please Restart with correct Configs");
+				//System.exit(1);
+				break;
 
+			} catch(ClassNotFoundException e) {
+				System.err.println("Invalid Stream! Please Restart with correct Configs");
+				System.exit(1);
 			}
 			
 			if(o instanceof FileVorlage){

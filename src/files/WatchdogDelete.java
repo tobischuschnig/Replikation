@@ -15,7 +15,7 @@ import util.Utill;
 
 /**
  * Dies ist ein Watchdog der auf Aenderungen schaut
- * In diesem Fall wird auf Modifikationen
+ * In diesem Fall wird auf Loeschen
  * Der Code des Watchdoges ist im wesentlichen von
  * http//jaxenter.de/artikel/javaniofile-Zeitgemaesses-Arbeiten-mit-Dateien-166848
  * @author Tobias Schuschnig

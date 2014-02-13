@@ -29,6 +29,7 @@ public class Filesynchro {
 			
 			Path path = Paths.get(URI.create("file:"+args[0]));
 			//    System.out.println(path.toString());
+//
 //			Thread thread1 = new Thread(new Receiver(path,portClient));
 //			thread1.start();
 //			System.out.println("Server is now receiving!");
