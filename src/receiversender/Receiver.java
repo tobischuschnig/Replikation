@@ -70,6 +70,7 @@ public class Receiver implements Runnable{
 			out = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
 			System.err.println("Invalid Stream! Please Restart with correct Configs");
+			System.exit(1);
 			return;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -99,7 +100,8 @@ public class Receiver implements Runnable{
 					if(fc.getMethod()==0) {
 						//
 						//System.out.println(path.toString()+"2/"+fc.getName());
-						fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
+						//fos = new FileOutputStream(path.toString()+"2/"+fc.getName());
+						fos = new FileOutputStream(path.toString()+"/"+fc.getName());
 						BufferedOutputStream bos = new BufferedOutputStream(fos);
 						//if (fc.getMethod() == 0 || fc.getMethod() == 2) {
 				    
@@ -107,7 +109,8 @@ public class Receiver implements Runnable{
 				    	bos.close();
 				    }
 				    else if (fc.getMethod() == 1){
-				    	Path newPath =  Paths.get(URI.create("file:"+path.toString()+"2/"+fc.getName()));
+				    	//Path newPath =  Paths.get(URI.create("file:"+path.toString()+"2/"+fc.getName()));
+				    	Path newPath =  Paths.get(URI.create("file:"+path.toString()+"/"+fc.getName()));
 				    	Files.delete(newPath);
 				    	fc.getName();
 				    }

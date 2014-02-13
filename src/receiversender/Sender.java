@@ -35,9 +35,10 @@ public class Sender implements Runnable{
 	private ObjectInputStream input; //Stream for Input
 
 	
-	public Sender(int port){		
+	public Sender(String ip,int port){		
 		try {
-			s = new Socket("localhost",port);
+			//s = new Socket("localhost",port);
+			s = new Socket(ip,port);
 			objectOutput = new ObjectOutputStream(s.getOutputStream());
 			input = new ObjectInputStream(s.getInputStream());
 			objectOutput.writeObject(null); //Initialize stream
