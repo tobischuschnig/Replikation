@@ -48,16 +48,16 @@ create table kunden(
 	primary key(knr)
 	)ENGINE = INNODB;
 	
-insert into kunden values(1,'Name1','Anschrift1');
-insert into kunden values(2,'Name2','Anschrift2');
-insert into kunden values(3,'Name3','Anschrift3');
-insert into kunden values(4,'Name4','Anschrift4');
-insert into kunden values(5,'Name5','Anschrift5');
-insert into kunden values(6,'Name6','Anschrift6');
-insert into kunden values(7,'Name7','Anschrift7');
-insert into kunden values(8,'Name8','Anschrift8');
-insert into kunden values(9,'Name9','Anschrift9');
-insert into kunden values(10,'Name10','Anschrift10');
+insert into kunden values(1,'Name1','Anschrift1',1);
+insert into kunden values(2,'Name2','Anschrift2',1);
+insert into kunden values(3,'Name3','Anschrift3',1);
+insert into kunden values(4,'Name4','Anschrift4',1);
+insert into kunden values(5,'Name5','Anschrift5',1);
+insert into kunden values(6,'Name6','Anschrift6',1);
+insert into kunden values(7,'Name7','Anschrift7',1);
+insert into kunden values(8,'Name8','Anschrift8',1);
+insert into kunden values(9,'Name9','Anschrift9',1);
+insert into kunden values(10,'Name10','Anschrift10',1);
 
 create table rechnung(
 	knr		integer,

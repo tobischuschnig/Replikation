@@ -18,7 +18,7 @@ kunden kunden (zeitstempel,zeitstempel)
 knr knr number+
 name name string
 anschrift anschrift string
-zeitstempel zeitstempel integer
+zeitstempel zeitstempel number
 ;
 rechnung rechnung (zeitstempel,zeitstempel)
 knr knr number

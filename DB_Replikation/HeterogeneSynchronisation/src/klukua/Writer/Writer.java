@@ -37,6 +37,8 @@ public class Writer {
 
 	private Connection connection;
 	private Statement statement;
+	
+	private String dbms;
 
 	// Hierin sind die kompletten Daten gespeichert, die in alle Tabellen
 	// gespeichert werden sollen
@@ -60,6 +62,8 @@ public class Writer {
 		this.cl = cl;
 
 		this.fullData = fullData;
+		
+		this.dbms = dbms;
 
 		// verbindung herstellen
 		if (dbms.equalsIgnoreCase("mysql"))
@@ -104,10 +108,16 @@ public class Writer {
 
 		// ob man zur Db verbunden ist
 		connectedToDatabase = true;
+		//Timestamp fuer benennen von Log File
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String fn = sdf.format(date) + "LOG.txt";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		String fn = "./logs/writer/" + sdf.format(date) + "_" + dbms + "_LOG.txt";
 		PrintWriter out = null;
+		try {
+			out = new PrintWriter(fn);
+		} catch (FileNotFoundException e) {
+			System.err.println("Kein File fuer logging gefunden!");
+		}
 //		String filename = String.valueOf(date.getYear()) + String.valueOf(date.getMonth()) + String.valueOf(date.getDay()) + 
 //				String.valueOf(date.getHours()) + String.valueOf(date.getMinutes()) + String.valueOf(date.getSeconds()) + "LOG.txt";
 //		String filename2 = date.toString() + "LOG.txt";
@@ -162,6 +172,15 @@ public class Writer {
 				// entfernen des letzten Beistrichs
 				values = values.substring(0, values.length() - 1);
 
+				//logging
+				
+					Date date2 = new Date();
+					SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss:SS");
+					String datestring = sdf2.format(date2);
+					out.println(datestring + "\tINSERT INTO "
+						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
+						+ columnsToBeInserted + ") VALUES(" + values + ")");
+				
 				// Insert durchfuehren
 				System.out.println("INSERT INTO "
 						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
@@ -169,23 +188,9 @@ public class Writer {
 				setUpdateQuery("INSERT INTO "
 						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
 						+ columnsToBeInserted + ") VALUES(" + values + ")");
-			
-				try {
-					out = new PrintWriter(fn);
-					Date date2 = new Date();
-					@SuppressWarnings("deprecation")
-					String datestring = String.valueOf(date2.getYear()) + "." +  String.valueOf(date2.getMonth()) + "." + String.valueOf(date2.getDay()) + 
-							"." + String.valueOf(date2.getHours()) + ":" + String.valueOf(date2.getMinutes()) + ":" + String.valueOf(date2.getSeconds());
-					out.println(datestring + "INSERT INTO "
-						+ cl.getTables()[i][0 + postgresqlIncrementor] + " ("
-						+ columnsToBeInserted + ") VALUES(" + values + ")");
-				} catch (FileNotFoundException e) {
-					System.err.println("Es konnte kein File zum loggen gefunden werden.");
-				}
-
 			}
-			out.close();
 		}
+		out.close();
 		statement.close();
 	}
 
