@@ -77,7 +77,7 @@ public class Sender implements Runnable{
 							con.await();						
 //							if(!client.isActive())
 //								break;
-						} catch (InterruptedException e) {
+						} catch (InterruptedException | NullPointerException e) {
 							//Could not wait
 						}
 					}

@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import receiversender.Receiver;
 import receiversender.Sender;
 
-public class Filesynchro {
+public class FilesynchroSender {
 	private static int portServer;
 	private static String ip;
 	
@@ -22,7 +22,7 @@ public class Filesynchro {
 		///Users/tobi/Desktop/Neuer //Test verzeichnis
 		try {
 			portServer = Integer.parseInt(args[1]); //sender
-			int portClient = Integer.parseInt(args[2]); //receiver
+			//int portClient = Integer.parseInt(args[2]); //receiver
 //			Server server = new Server(files,args[0],portServer);
 //			Client client = new Client(files,args[0],portServer);
 			
@@ -30,12 +30,12 @@ public class Filesynchro {
 			Path path = Paths.get(URI.create("file:"+args[0]));
 			//    System.out.println(path.toString());
 //
-			Thread thread1 = new Thread(new Receiver(path,portClient));
-			thread1.start();
-			System.out.println("Server is now receiving!");
+//			Thread thread1 = new Thread(new Receiver(path,portClient));
+//			thread1.start();
+//			System.out.println("Server is now receiving!");
 			
 			//Sender sender = new Sender(portServer);
-			Sender sender = new Sender(args[3],portServer);
+			Sender sender = new Sender(args[2],portServer);
 			Thread thread2 = new Thread(sender);
 			thread2.start();
 			System.out.println("Server is now send able!");
@@ -57,9 +57,9 @@ public class Filesynchro {
 				System.err.println("Invalid Input! \nThe Path musst exist!");
 				System.exit(1);
 			}
-			ip = args[3];
+			ip = args[2];
 		}catch(Exception e) {
-			System.err.println("Invalid Input! \nPlease Enter Path like this exampel: path, Server Port, Client Port, IP Server" +
+			System.err.println("Invalid Input! \nPlease Enter Path like this exampel: path, Server Port, IP Server" +
 					"Ports musst be numeric. Path like this: /Users/tobi/Desktop/Neuer");
 			e.printStackTrace();
 			System.exit(1);
@@ -81,5 +81,5 @@ public class Filesynchro {
 		Thread thread2 = new Thread(sender);
 		thread2.start();
 		System.out.println("Server is now send able!");
-	}
+	} 
 }
