@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import receiversender.Receiver;
 import receiversender.Sender;
@@ -43,7 +45,8 @@ public class FilesynchroReceiver {
 		}catch(Exception e) {
 			System.err.println("Invalid Input! \nPlease Enter Path like this exampel: path, Client Port" +
 					"Ports musst be numeric. Path like this: /Users/tobi/Desktop/Neuer");
-			e.printStackTrace();
+			//e.printStackTrace();
+			Logger.getLogger(FilesynchroReceiver.class.getName()).log(Level.SEVERE, null, e);
 			System.exit(1);
 		}
 	}
@@ -54,7 +57,8 @@ public class FilesynchroReceiver {
                 fileNames.add(path.toString());
                 System.out.println(path.toString());
             }
-        } catch (IOException ex) {}
+        } catch (IOException ex) {Logger.getLogger(FilesynchroReceiver.class.getName()).log(Level.SEVERE, null, ex);
+}
         return fileNames;
     }
 	
@@ -63,5 +67,5 @@ public class FilesynchroReceiver {
 		Thread thread2 = new Thread(sender);
 		thread2.start();
 		System.out.println("Server is now send able!");
-	}
+	} 
 }

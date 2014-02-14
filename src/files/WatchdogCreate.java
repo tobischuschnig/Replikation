@@ -9,6 +9,8 @@ import java.nio.file.WatchEvent;
 import java.nio.file.*;
 import java.nio.file.WatchService.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.FileVorlage;
 
@@ -57,22 +59,24 @@ public class WatchdogCreate implements Runnable {
 					Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
 					FileVorlage file = Utill.packing(newPath,false);
 					sender.sendMessage(file);
-					
+					Logger.getLogger(WatchdogCreate.class.getName()).log(Level.SEVERE, null, "New file: "+ newPath);
 						//Filesynchro.senderneu();
 						//server.created(newPath);
 					System.out.println("New file: " + newPath);
 					//break;
-					}
+					} 
 				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.err.println("Fail by reading the File. Please check the File and try again.");
-
+			Logger.getLogger(WatchdogCreate.class.getName()).log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			System.err.println("Invalid File! Please check the Path and the File" +
-					"\nThe Path may not consists spaces.");
+			System.err.println("Invalid File! Please check the Path and the File and then Restart the Service." +
+					"\nThe Path may not consists spaces. ");
+			Logger.getLogger(WatchdogCreate.class.getName()).log(Level.SEVERE, null, e);
+			System.exit(1);
 		}
 	}
 

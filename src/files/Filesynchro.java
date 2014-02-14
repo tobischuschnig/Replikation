@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import receiversender.Receiver;
 import receiversender.Sender;
@@ -17,7 +19,7 @@ import receiversender.Sender;
 public class Filesynchro {
 	private static int portServer;
 	private static String ip;
-	
+	 
 	public static void main (String args[]) {
 		///Users/tobi/Desktop/Neuer //Test verzeichnis
 		try {
@@ -61,8 +63,10 @@ public class Filesynchro {
 		}catch(Exception e) {
 			System.err.println("Invalid Input! \nPlease Enter Path like this exampel: path, Server Port, Client Port, IP Server" +
 					"Ports musst be numeric. Path like this: /Users/tobi/Desktop/Neuer");
-			e.printStackTrace();
-			System.exit(1);
+			//e.printStackTrace();
+			 Logger.getLogger(Filesynchro.class.getName()).log(Level.SEVERE, null, e);
+			System.exit(1); 
+			
 		}
 	}
 	public static ArrayList<String> fileList(String directory) {
@@ -72,7 +76,7 @@ public class Filesynchro {
                 fileNames.add(path.toString());
                 System.out.println(path.toString());
             }
-        } catch (IOException ex) {}
+        } catch (IOException ex) {Logger.getLogger(Filesynchro.class.getName()).log(Level.SEVERE, null, ex);}
         return fileNames;
     }
 	

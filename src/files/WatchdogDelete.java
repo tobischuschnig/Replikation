@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 
 import java.nio.file.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import receiversender.Sender;
 
@@ -55,6 +57,8 @@ public class WatchdogDelete implements Runnable {
 					FileVorlage file = Utill.packing(newPath,true);
 					//System.out.print(file.getMethod());
 					sender.sendMessage(file);
+					Logger.getLogger(WatchdogDelete.class.getName()).log(Level.SEVERE, null, "Delete file: "+ newPath);
+
 					System.out.println("Delete file: " + newPath);
 					//break;
 					}
@@ -64,9 +68,13 @@ public class WatchdogDelete implements Runnable {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.err.println("Fail by reading the File. Please check the File and try again.");
+			Logger.getLogger(WatchdogDelete.class.getName()).log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			System.err.println("Invalid File! Please check the Path and the File" +
-					"\nThe Path may not consists spaces.");
+			System.err.println("Invalid File! Please check the Path and the File and then Restart the Service." +
+					"\nThe Path may not consists spaces. ");
+			Logger.getLogger(WatchdogDelete.class.getName()).log(Level.SEVERE, null, e);
+			System.exit(1);
+
 		}
 	}
 

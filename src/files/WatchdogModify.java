@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 
 import java.nio.file.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.FileVorlage;
 
@@ -52,13 +54,14 @@ public class WatchdogModify implements Runnable {
 				for(WatchEvent<?> event : watchKey.pollEvents()) {
 					if(!(event.context()).toString().contains(".DS_Store")) {
 						Path newPath =  Paths.get(URI.create("file:"+ordner+"/"+event.context()));
-						//FileVorlage file = Utill.packing(newPath,false);
-						//sender.sendMessage(file);
-						
+						FileVorlage file = Utill.packing(newPath,false);
+						sender.sendMessage(file);
+						Logger.getLogger(WatchdogModify.class.getName()).log(Level.SEVERE, null, "Modify file: "+ newPath);
+
 							//sender.sendMessage(Utill.packing(newPath,));
 							//server.created(newPath);
 						
-						//System.out.println("Modify file: " + newPath);
+						System.out.println("Modify file: " + newPath);
 						
 							//break;
 					}
@@ -68,11 +71,14 @@ public class WatchdogModify implements Runnable {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.err.println("Fail by reading the File. Please check the File and try again.");
+			Logger.getLogger(WatchdogModify.class.getName()).log(Level.SEVERE, null, e);
 
 		} catch (Exception e) {
-			System.err.println("Invalid File! Please check the Path and the File" +
-					"\nThe Path may not consists spaces.");
+			System.err.println("Invalid File! Please check the Path and the File and then Restart the Service." +
+					"\nThe Path may not consists spaces. ");
+			Logger.getLogger(WatchdogModify.class.getName()).log(Level.SEVERE, null, e);
+			System.exit(1);
 		}
-	}
+	} 
 
 }

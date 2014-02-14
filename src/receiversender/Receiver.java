@@ -13,6 +13,10 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import files.WatchdogModify;
 
 import model.FileVorlage;
 
@@ -115,12 +119,14 @@ public class Receiver implements Runnable{
 				    
 						bos.write(fc.getF());
 				    	bos.close();
+						Logger.getLogger(Receiver.class.getName()).log(Level.SEVERE, null, "Received file:"+path.toString()+"/"+fc.getName());
 				    }
 				    else if (fc.getMethod() == 1){
 				    	//Path newPath =  Paths.get(URI.create("file:"+path.toString()+"2/"+fc.getName()));
 				    	Path newPath =  Paths.get(URI.create("file:"+path.toString()+"/"+fc.getName()));
 				    	Files.delete(newPath);
 				    	fc.getName();
+						Logger.getLogger(Receiver.class.getName()).log(Level.SEVERE, null, "Deleted file:"+path.toString()+"/"+fc.getName());
 				    }
 				} catch (Exception e) {
 					e.printStackTrace();
